@@ -1,0 +1,101 @@
+@echo off
+title Ping Multiplo
+
+@echo Digite o numero da Filial
+set /p "flNum=> "
+
+echo.
+
+echo Filial: %flNum%
+
+if %flNum% LEQ 254 (
+   SET /A range = 100
+   SET /A resto = %flNum%
+)
+
+if %flNum% GTR 254 ( 
+   if %flNum% LEQ 508 (
+      SET /A range = 101
+      SET /A resto = %flNum%-254
+   )
+)
+
+if %flNum% GTR 508 ( 
+   if %flNum% LEQ 762 (
+      SET /A range = 102
+      SET /A resto = %flNum%-254*2	
+   )
+)
+
+if %flNum% GTR 762 ( 
+   if %flNum% LEQ 1016 (
+      SET /A range = 103
+      SET /A resto = %flNum%-254*3	
+   )
+)
+
+if %flNum% GTR 1016 ( 
+   if %flNum% LEQ 1270 (
+      SET /A range = 104
+      SET /A resto = %flNum%-254*4	
+   )
+)
+
+if %flNum% GTR 1270 ( 
+   if %flNum% LEQ 1524 (
+      SET /A range = 105
+      SET /A resto = %flNum%-254*5	
+   )
+)
+
+if %flNum% GTR 1524 ( 
+   if %flNum% LEQ 1778 (
+      SET /A range = 106
+      SET /A resto = %flNum%-254*6	
+   )
+)
+
+if %flNum% GTR 1778 ( 
+   if %flNum% LEQ 2032 (
+      SET /A range = 107
+      SET /A resto = %flNum%-254*7	
+   )
+)
+
+if %flNum% GTR 2032 ( 
+   if %flNum% LEQ 2286 (
+      SET /A range = 108
+      SET /A resto = %flNum%-254*8	
+   )
+)
+
+if %flNum% GTR 2286 ( 
+   if %flNum% LEQ 2540 (
+      SET /A range = 109
+      SET /A resto = %flNum%-254*9	
+   )
+)
+
+if %flNum% GTR 2540 ( 
+   if %flNum% LEQ 2794 (
+      SET /A range = 110
+      SET /A resto = %flNum%-254*10
+   )
+)
+
+echo Faixa IP: 10.%range%.%resto%.
+
+start "FL > %flNum% - Tunnel 1 - .85" ping -t 10.85.%range%.%resto%
+start "FL > %flNum% - Tunnel 2 - .86" ping -t 10.86.%range%.%resto%
+start "FL > %flNum% - Fortinet - .1" ping -t 10.%range%.%resto%.1
+
+start "FL > %flNum% - Switch 1 - .10" ping -t 10.%range%.%resto%.10
+start "FL > %flNum% - Switch 2 - .11" ping -t 10.%range%.%resto%.11
+start "FL > %flNum% - Servidor - .30" ping -t 10.%range%.%resto%.30
+
+start "FL > %flNum% - AP1 - .15" ping -t 10.%range%.%resto%.15
+start "FL > %flNum% - AP2 - .16" ping -t 10.%range%.%resto%.16
+start "FL > %flNum% - AP3 - .17" ping -t 10.%range%.%resto%.17
+start "FL > %flNum% - AP4 - .18" ping -t 10.%range%.%resto%.18
+
+pause
